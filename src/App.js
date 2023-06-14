@@ -68,42 +68,57 @@
 // }
 // export default App;
 
-//Stateful component
+// //Stateful component
+// 
+// import { Component } from "react";
+// export class App extends Component{
+// 
+//     constructor(props)
+//     {
+//         super(props);
+// 
+//         this.state={
+//             count:0,
+//         };
+//     }
+//      handlePlus=()=>{
+//         this.setState((prevState)=> ({
+//             count: prevState.count+1,
+//         }))
+//     }
+//     handleSub=()=>{
+//         this.setState((prevState)=> ({
+//             count: prevState.count-1,
+//         }))
+//     }
+//     handleZero=()=>{
+//         this.setState((prevState)=> ({
+//             count: 0,
+//         }))
+//     } 
+//     render()
+//     {
+//         return(
+//             <div>
+//                 <p>Count : {this.state.count}</p>
+//                 <button onClick={this.handlePlus}>plus</button>
+//                 <button onClick={this.handleSub}>minus</button>
+//                 <button onClick={this.handleZero}>zero</button>
+//             </div>
+//         )
+//     }
+// }
+// export default App;
 
-import { Component } from "react";
+//Reusable Component
+import React, { Component } from "react";
+import Hello from './components/Hello'
 export class App extends Component{
-
-    constructor(props)
-    {
-        super(props);
-
-        this.state={
-            count:0,
-        };
-    }
-     handlePlus=()=>{
-        this.setState((prevState)=> ({
-            count: prevState.count+1,
-        }))
-    }
-    handleSub=()=>{
-        this.setState((prevState)=> ({
-            count: prevState.count-1,
-        }))
-    }
-    handleZero=()=>{
-        this.setState((prevState)=> ({
-            count: 0,
-        }))
-    } 
     render()
     {
         return(
             <div>
-                <p>Count : {this.state.count}</p>
-                <button onClick={this.handlePlus}>plus</button>
-                <button onClick={this.handleSub}>minus</button>
-                <button onClick={this.handleZero}>zero</button>
+                <Hello />
             </div>
         )
     }
