@@ -1,126 +1,46 @@
 
-//Functional Component
-// function App() {
-//   console.log("Hello from component1")
-//   return (
-//     <div><p>Hello World !!!</p></div>
-//   );
-// }
-// 
-// export default App;
+//useState hook
 
-// Function component and passing props  
 // import React from 'react'
+// import { useState } from 'react'
 // 
-// function Hello(props)
-// {
-//     return(
-//         <div>
-//             Hello, {props.name}!!
-//         </div>
-//     )
-// }
 // function App() {
+// const [counter,setCounter] = useState(0)
+// 
+// setTimeout(
+//     ()=>setCounter(counter+1),1000
+// );
 //   return (
-//     <div>
-//         <Hello name={'Indira'}/>
-//     </div>
+//     <div>{counter}</div>
 //   )
 // }
 // 
 // export default App
 
-//Class Component
-// import { Component } from "react";
-// class App extends Component{
-//     render()
-//     {
-//         return(
-//             <div>Hello</div>
-//         )
-//     }
-// }
-// export default App;
+import React from 'react'
+import { useState } from 'react'
 
-//Passing props in class component
+function App() {
+const [counter,setCounter] = useState(0)
 
-// import { Component } from "react";
-// 
-// class Hello extends Component{
-//     render()
-//     {
-//         console.log(this.props)
-//         return(
-//             <div>Hello World!!! {this.props.name}</div>
-//         )
-//     }
-// }
-// 
-// class App extends Component{
-//     render()
-//     {
-//         return(
-//             <div>
-//                 <Hello name={'krish'} />
-//             </div>
-//         )
-//     }
-// }
-// export default App;
-
-// //Stateful component
-// 
-// import { Component } from "react";
-// export class App extends Component{
-// 
-//     constructor(props)
-//     {
-//         super(props);
-// 
-//         this.state={
-//             count:0,
-//         };
-//     }
-//      handlePlus=()=>{
-//         this.setState((prevState)=> ({
-//             count: prevState.count+1,
-//         }))
-//     }
-//     handleSub=()=>{
-//         this.setState((prevState)=> ({
-//             count: prevState.count-1,
-//         }))
-//     }
-//     handleZero=()=>{
-//         this.setState((prevState)=> ({
-//             count: 0,
-//         }))
-//     } 
-//     render()
-//     {
-//         return(
-//             <div>
-//                 <p>Count : {this.state.count}</p>
-//                 <button onClick={this.handlePlus}>plus</button>
-//                 <button onClick={this.handleSub}>minus</button>
-//                 <button onClick={this.handleZero}>zero</button>
-//             </div>
-//         )
-//     }
-// }
-// export default App;
-
-//Reusable Component
-import React, { Component } from "react";
-import Hello from './components/Hello'
-export class App extends Component{
-    render()
-    {
-        return(
-            <div>
-                <Hello />
-            </div>
-        )
-    }
+const handleClickPlus = ()=>{
+    setCounter(counter+1)
 }
-export default App;
+const handleClickMinus = ()=>{
+    setCounter(counter-1)
+}
+const handleClickZero = ()=>{
+    setCounter(0)
+}
+
+  return (
+    <div>
+    <div>{counter}</div>
+    <button onClick={handleClickPlus}>Plus</button>
+    <button onClick={handleClickMinus}>Minus</button>
+    <button onClick={handleClickZero}>Zero</button>
+    </div>
+  )
+}
+
+export default App
