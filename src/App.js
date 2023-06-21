@@ -42,11 +42,44 @@
 
 
 
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import { createContext } from 'react';
 
+
+//create a context
+const MessageContext = createContext();
+
+function GrandChild()
+{
+  const message=useContext(MessageContext)
+  return(
+    <div>
+      <h1> Grnad Child</h1>
+      <p>{message.message}</p>
+    </div>
+  )
+}
+function ChildComponent()
+{
+  const message=useContext(MessageContext)
+  return(
+    <div>
+      <h1>Child Component</h1>
+      <p>{message.message}</p>
+      <GrandChild />
+    </div>
+  )
+}
 function App() {
+  const[message,setMessage] = useState('Hello');
   return (
-    <div>App</div>
+    <div>
+    <h1>Parent Component</h1>
+    <MessageContext.Provider value={{message:message}}>
+      <ChildComponent />
+    </MessageContext.Provider>
+
+    </div>
   )
 }
 
