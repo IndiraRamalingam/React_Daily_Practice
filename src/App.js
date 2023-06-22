@@ -40,45 +40,89 @@
 
 
 
+// useContext hook --> to avoid props drilling
+// 
+// import React, { useContext, useState } from 'react'
+// import { createContext } from 'react';
+// 
+// 
+// //create a context
+// const MessageContext = createContext();
+// 
+// function GrandChild()
+// {
+//   const message=useContext(MessageContext)
+//   return(
+//     <div>
+//       <h1> Grnad Child</h1>
+//       <p>{message.message}</p>
+//     </div>
+//   )
+// }
+// function ChildComponent()
+// {
+//   const message=useContext(MessageContext)
+//   return(
+//     <div>
+//       <h1>Child Component</h1>
+//       <p>{message.message}</p>
+//       <GrandChild />
+//     </div>
+//   )
+// }
+// function App() {
+//   const[message,setMessage] = useState('Hello');
+//   return (
+//     <div>
+//     <h1>Parent Component</h1>
+//     <MessageContext.Provider value={{message:message}}>
+//       <ChildComponent />
+//     </MessageContext.Provider>
+// 
+//     </div>
+//   )
+// }
+// 
+// export default App
 
 
-import React, { useContext, useState } from 'react'
-import { createContext } from 'react';
+// Session task --> Profile name changes
 
+import React, { createContext, useContext, useState } from 'react'
 
-//create a context
-const MessageContext = createContext();
+const ProfileContext=createContext();
 
-function GrandChild()
+//Profile Component
+function Profile()
 {
-  const message=useContext(MessageContext)
+  const {profileName,setprofileName}=useContext(ProfileContext)
+let onChangeProfileHandler = (event) =>{
+  setprofileName(event.target.value);
+  console.log(event.target.value);
+}
+
   return(
     <div>
-      <h1> Grnad Child</h1>
-      <p>{message.message}</p>
+      <h2>Profile Name: {profileName}</h2>
+      <input 
+      type="text"
+      value={profileName}
+      onChange={onChangeProfileHandler}
+      ></input>
     </div>
   )
+
 }
-function ChildComponent()
-{
-  const message=useContext(MessageContext)
-  return(
-    <div>
-      <h1>Child Component</h1>
-      <p>{message.message}</p>
-      <GrandChild />
-    </div>
-  )
-}
+
+//Parent Component
 function App() {
-  const[message,setMessage] = useState('Hello');
+  const [profileName,setprofileName]=useState('');
   return (
     <div>
-    <h1>Parent Component</h1>
-    <MessageContext.Provider value={{message:message}}>
-      <ChildComponent />
-    </MessageContext.Provider>
-
+      <h1>Parent</h1>
+      <ProfileContext.Provider value={{profileName,setprofileName}}>
+        <Profile />
+      </ProfileContext.Provider>
     </div>
   )
 }
