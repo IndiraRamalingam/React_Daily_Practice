@@ -114,11 +114,16 @@
 import React, { Component } from "react";
 import Hello from './components/Hello'
 export class App extends Component{
+  
     render()
     {
+      // let handleRequest =() =>{
+      //   <Hello />
+      // }
         return(
             <div>
-                <Hello />
+                {/* <Hello /> */}
+                <button onClick={()=> {<Hello />}}>Click Here</button>
             </div>
         )
     }
