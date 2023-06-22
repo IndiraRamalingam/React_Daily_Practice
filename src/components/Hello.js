@@ -1,13 +1,23 @@
-//Reusable Component
-import React, {Component} from 'react';
+// //Reusable Component
+// import React, {Component} from 'react';
+// 
+// class Hello extends Component{
+//     render()
+//     {
+//         return(
+//             <div>Hello</div>
+//         )
+//     }
+// }
+// 
+// export default Hello;
 
-class Hello extends Component{
-    render()
-    {
-        return(
-            <div>Hello</div>
-        )
-    }
+import React from 'react'
+
+function Hello() {
+  return (
+    <div>Hello</div>
+  )
 }
 
-export default Hello;
+export default Hello
