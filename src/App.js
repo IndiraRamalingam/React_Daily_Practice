@@ -1,126 +1,225 @@
-
-//Functional Component
-// function App() {
-//   console.log("Hello from component1")
-//   return (
-//     <div><p>Hello World !!!</p></div>
-//   );
+// import React, { useRef, useState } from 'react'
+// 
+// function Note({note}){
+//   return(
+//     <li> {note.content} </li>
+//   )
 // }
 // 
-// export default App;
-
-// Function component and passing props  
-// import React from 'react'
+// function App(props) {
+//   const[notes,setNotes] =useState(props.notes);
+//   const[newNote,setNewNote]=useState(' ');
+//   const[newNoteImp,setNewNoteImp]=useState(' ');
+//   const[showStatus,setShowStatus]=useState('all');
 // 
-// function Hello(props)
+//   //useRef
+// 
+//   const newNoteContentRef=useRef(null);
+// 
+// let handleNote =(event) =>{
+//   console.log(event.target.value)
+//   setNewNote(event.target.value)
+// }
+// 
+// let handleSelectChange =(event) =>
 // {
-//     return(
-//         <div>
-//             Hello, {props.name}!!
-//         </div>
-//     )
+//   setNewNoteImp(event.target.value)
 // }
-// function App() {
+// 
+// let addNote =(event)=>{
+//   event.preventDefault();
+//   //create new object
+// 
+//   let noteObject ={
+//     id:notes.length+1,
+//     content:newNote,
+//     //important:Math.random()<0.5,
+//     important:newNoteImp,
+//   }
+// 
+//   //add the new object to the notes state
+//   setNotes(notes.concat(noteObject));
+// 
+//   //clear the input text box
+//   setNewNote('');
+//   newNoteContentRef.current.focus();
+// 
+// }
 //   return (
 //     <div>
-//         <Hello name={'Indira'}/>
+//       <h1>Notes</h1>
+//       <ul>
+//         {notes.map(note => 
+//         <Note key={note.id} note={note}/>
+//         )}
+//       </ul>
+//       <form onSubmit={addNote}>
+//         <input onChange={handleNote} 
+//         value={newNote}
+//         ref={newNoteContentRef}
+//         />
+//         <label for="dropdownImportant">Important: </label>
+//         <select 
+//         id='dropdownNoteImportant'
+//         onChange={handleSelectChange}
+//         value={newNoteImp}>
+//           <option>--select--</option>
+//           <option>True</option>
+//           <option>False</option>
+//         </select>
+//         <button type="submit">Add Note</button>
+//       </form>
 //     </div>
 //   )
 // }
 // 
 // export default App
 
-//Class Component
-// import { Component } from "react";
-// class App extends Component{
-//     render()
-//     {
-//         return(
-//             <div>Hello</div>
-//         )
-//     }
-// }
-// export default App;
 
-//Passing props in class component
 
-// import { Component } from "react";
-// 
-// class Hello extends Component{
-//     render()
-//     {
-//         console.log(this.props)
-//         return(
-//             <div>Hello World!!! {this.props.name}</div>
-//         )
-//     }
-// }
-// 
-// class App extends Component{
-//     render()
-//     {
-//         return(
-//             <div>
-//                 <Hello name={'krish'} />
-//             </div>
-//         )
-//     }
-// }
-// export default App;
 
-// //Stateful component
-// 
-// import { Component } from "react";
-// export class App extends Component{
-// 
-//     constructor(props)
-//     {
-//         super(props);
-// 
-//         this.state={
-//             count:0,
-//         };
-//     }
-//      handlePlus=()=>{
-//         this.setState((prevState)=> ({
-//             count: prevState.count+1,
-//         }))
-//     }
-//     handleSub=()=>{
-//         this.setState((prevState)=> ({
-//             count: prevState.count-1,
-//         }))
-//     }
-//     handleZero=()=>{
-//         this.setState((prevState)=> ({
-//             count: 0,
-//         }))
-//     } 
-//     render()
-//     {
-//         return(
-//             <div>
-//                 <p>Count : {this.state.count}</p>
-//                 <button onClick={this.handlePlus}>plus</button>
-//                 <button onClick={this.handleSub}>minus</button>
-//                 <button onClick={this.handleZero}>zero</button>
-//             </div>
-//         )
-//     }
-// }
-// export default App;
 
-//Reusable Component
-// import React, { Component } from "react";
-// import Hello from './components/Hello'
-// export class App extends Component{
-//     render()
-//     {
-//         return(
-//             <div>
-//                 <Hello />
-//             </div>
-//         )
-//     }
-// }
-// export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// A Simple Note taking Application
+import React, { useEffect, useRef, useState } from 'react';
+
+function Note({note}) {
+  return (
+    <li>{ note.content }</li>
+  )
+}
+
+function App(props) {
+  
+  // define a state
+  const [notes, setNotes] = useState([]);
+  const [newNoteContent, setNewNoteContent] = useState('');
+  const [newNoteImportant, setNewNoteImportant] = useState('');
+  const [showStatus, setShowStatus] = useState('all');
+
+  // get the data
+  useEffect(() => {
+    setNotes(props.notes);
+  }, []);
+
+  // create a reference for the first input text box
+  const newNoteContentRef = useRef(null);
+
+
+  // define the addNote method
+  let addNote = (event) => {
+    event.preventDefault();
+    
+    // create a new object
+    let noteObject = {
+      id: notes.length + 1,
+      content: newNoteContent,
+      important: newNoteImportant==='true',
+    }
+
+    // add the new object to the notes state
+    setNotes(notes.concat(noteObject));
+
+    // console.log(noteObject);
+
+    // clear the input text box
+    setNewNoteContent('');
+    setNewNoteImportant('');
+    newNoteContentRef.current.focus();
+  }
+
+  let handleNoteChange = (event) => {
+    setNewNoteContent(event.target.value);
+  }
+
+  let handleSelectChange = (event) => {
+    setNewNoteImportant(event.target.value);
+  }
+
+  let handleStatusChange = (event) => {
+    setShowStatus(event.target.value);
+    // console.log(event.target.value);
+  }
+
+  let filterNotes = (notes, status) => {
+    switch (status) {
+      case 'all':
+        return notes;
+      case 'imp':
+        return notes.filter(note => note.important === true);
+      case 'nonimp':
+        return notes.filter(note => note.important === false);
+    }
+  }
+
+  const notesFiltered = filterNotes(notes, showStatus);
+
+  return (
+    <div>
+      <h1>Notes</h1>
+
+      <label>
+        <input type='radio' name='filter' value="all" checked={ showStatus === 'all' } onChange={handleStatusChange} />
+        Show All Notes
+      </label>
+
+      <label>
+        <input type='radio' name='filter' value="imp" checked={ showStatus === 'imp' } onChange={handleStatusChange} />
+        Show Important Notes
+      </label>
+
+      <label>
+        <input type='radio' name='filter' value="nonimp" checked={ showStatus === 'nonimp' } onChange={handleStatusChange} />
+        Show Non-Important Notes
+      </label>
+
+      <ul>
+        {notesFiltered.map(note => 
+          <Note key={note.id} note={note} />
+        )}
+      </ul>
+
+      {/* add a simple form for adding notes */}
+      <form onSubmit={addNote}>
+        <input
+          value={newNoteContent}
+          onChange={handleNoteChange}
+          placeholder='type a note...' 
+          ref={newNoteContentRef}
+          /> <br /><br />
+        {/* <input
+          type='text'
+          placeholder='enter true or false'
+          value={newNoteImportant}
+          onChange={(e) => setNewNoteImportant(e.target.value)} /> */}
+        <label form='dropdownNoteImportant'>Is Important: </label>
+        <select
+          id='dropdownNoteImportant'
+          onChange={handleSelectChange}
+          value={newNoteImportant}>
+          <option>--Select--</option>
+          <option>true</option>
+          <option>false</option>
+        </select>
+        <br /><br />
+        <button type='submit'>Add New Note</button>
+      </form>
+    </div>
+  )
+}
+
+export default App;
