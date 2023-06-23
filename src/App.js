@@ -111,21 +111,16 @@
 // export default App;
 
 //Reusable Component
-import React, { Component } from "react";
-import Hello from './components/Hello'
-export class App extends Component{
-  
-    render()
-    {
-      // let handleRequest =() =>{
-      //   <Hello />
-      // }
-        return(
-            <div>
-                {/* <Hello /> */}
-                <button onClick={()=> {<Hello />}}>Click Here</button>
-            </div>
-        )
-    }
-}
-export default App;
+// import React, { Component } from "react";
+// import Hello from './components/Hello'
+// export class App extends Component{
+//     render()
+//     {
+//         return(
+//             <div>
+//                 <Hello />
+//             </div>
+//         )
+//     }
+// }
+// export default App;
